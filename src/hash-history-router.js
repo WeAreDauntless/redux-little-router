@@ -29,9 +29,18 @@ export default ({
     hashType
   });
 
-  const { pathname, search } = getLocation();
-  const location = history
-    .createLocation({ pathname, search });
+  const { hash } = getLocation();
+
+  // The hash will begin with one of the following prefixes:
+  //     #     If hashType == 'noslash'
+  //     #/    If hashType == 'slash'
+  //     #!/   If hashType == 'hashbang'
+
+  const hashWithoutPrefix = hash.replace(/^((#\/)|(#!\/)|(#))/, '');
+
+  const pathname = `/${ hashWithoutPrefix }`;
+
+  const location = history.createLocation({ pathname });
 
   return {
     routerEnhancer: installRouter({
