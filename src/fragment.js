@@ -10,6 +10,7 @@ type RelativeProps = {
   matchRoute: Function,
   forRoute?: string,
   withConditions?: (location: Location) => bool,
+  exposeParams: boolean,
   children: React.Element<*>
 };
 
@@ -114,6 +115,7 @@ const Fragment = (props: Props): ?React$Element<any> => {
     matchRoute,
     forRoute,
     withConditions,
+    exposeParams,
     children,
     parentId
   } = props;
@@ -147,7 +149,15 @@ const Fragment = (props: Props): ?React$Element<any> => {
     }
   }
 
-  return <div>{children}</div>;
+  const returnedChildren =
+    exposeParams ?
+    React.Children.map(
+      children,
+      (child) => React.cloneElement(child, matchResult.params)
+    )
+    : children;
+
+  return <div>{returnedChildren}</div>;
 };
 
 type WrappedProps = Props & {
