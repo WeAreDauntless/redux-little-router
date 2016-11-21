@@ -6229,6 +6229,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      matchRoute = props.matchRoute,
 	      forRoute = props.forRoute,
 	      withConditions = props.withConditions,
+	      exposeParams = props.exposeParams,
 	      children = props.children,
 	      parentId = props.parentId;
 	
@@ -6258,10 +6259,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	
+	  var returnedChildren = exposeParams ? _react2.default.Children.map(children, function (child) {
+	    return _react2.default.cloneElement(child, matchResult.params);
+	  }) : children;
+	
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    children
+	    returnedChildren
 	  );
 	};
 	
