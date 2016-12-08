@@ -169,8 +169,8 @@ const WrappedFragment = (props: WrappedProps) => {
     const Wrapper: ReactClass<any> = props.wrapper;
     const fragmentOutput: ?React$Element<any> = Fragment(props);  // eslint-disable-line new-cap
     const {
-      location, matchRoute, forRoute, withConditions,  // eslint-disable-line no-unused-vars
-      children, parentId, wrapper, ...rest             // eslint-disable-line no-unused-vars
+      location, matchRoute, forRoute, withConditions,     // eslint-disable-line no-unused-vars
+      exposeParams, children, parentId, wrapper, ...rest  // eslint-disable-line no-unused-vars
     } = props;
     return (
       <Wrapper {...rest}>
